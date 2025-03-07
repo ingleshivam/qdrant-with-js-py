@@ -1,1 +1,2 @@
 Flask==3.0.3
+qdrant-client==1.13.3
