@@ -80,3 +80,4 @@ def qdrant_example():
 @app.route("/api/deletecollection")
 def delete_collection():
     client.delete_collection(collectionName)
+    return "Collection Deleted Successfully !"
