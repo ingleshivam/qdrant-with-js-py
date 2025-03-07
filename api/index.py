@@ -4,16 +4,14 @@ from qdrant_client import QdrantClient, models
 qdrant_url = "https://44b50d6d-d0a7-427b-be88-d25634c92006.us-east4-0.gcp.cloud.qdrant.io"
 qdrant_apikey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.nsoE8yGqhtjLv8J0dwSS3GTbH_Hyfvhtv3z5Q3ZCww4"
 collectionName = "tenant_data"
-
+client = QdrantClient(
+    url=qdrant_url,
+    api_key=qdrant_apikey
+)
 app = Flask(__name__)
 
 @app.route("/api/callqdrant")
 def qdrant_example():
-    client = QdrantClient(
-        url=qdrant_url,
-        api_key=qdrant_apikey
-    )
-
     client.create_collection(
         collection_name=collectionName,
         shard_number=2,
@@ -78,3 +76,7 @@ def qdrant_example():
         })
 
     return jsonify(result_dict)
+
+@app.route("/api/deletecollection")
+def delete_collection():
+    client.delete_collection(collectionName)
